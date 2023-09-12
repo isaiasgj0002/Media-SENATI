@@ -11,6 +11,8 @@ class Video extends Model
     protected $primarykey = "id";
     public $timestamps = false;
     protected $fillable=[
+        'titulo',
+        'descripcion',
         'ruta_video',
         'id_usuario'
     ];
