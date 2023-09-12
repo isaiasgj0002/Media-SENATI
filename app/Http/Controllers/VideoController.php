@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Input;
 
 
+
 class VideoController extends Controller
 {
     public function __construct()
@@ -33,6 +34,12 @@ class VideoController extends Controller
         $video->id_usuario = auth()->user()->id;
         $video->save();
         Session::flash('status', 'Se publico el video');
+        return Redirect::to('/home');
+    }
+    public function destroy($id){
+        $video = Video::findOrFail($id);
+        $video->delete();
+        Session::flash('status', 'Se elimino el video');
         return Redirect::to('/home');
     }
 }

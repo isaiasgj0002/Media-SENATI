@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Estudios;
 use App\Models\Trabajos;
 use App\Models\Video;
+use App\Models\Solicitudes;
 use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
@@ -31,6 +32,9 @@ class HomeController extends Controller
         $estudiosExists = Estudios::where('id_usuario', $user->id)->exists();
         $trabajosExists = Trabajos::where('id_usuario', $user->id)->exists();
         $videos = Video::all();
-        return view('home', compact('estudiosExists', 'trabajosExists', 'videos'));
+        $solicitudesRecibidas = Solicitudes::where('id_usuario_recibir', $user->id)
+            ->with('usuarioEmisor') // Cargar la relación
+            ->get();
+        return view('home', compact('estudiosExists', 'trabajosExists', 'videos', 'solicitudesRecibidas'));
     }
 }

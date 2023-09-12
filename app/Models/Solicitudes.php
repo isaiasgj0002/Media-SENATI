@@ -4,24 +4,25 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\User;
 
-class Video extends Model
+class Solicitudes extends Model
 {
-    protected $table = 'video';
+    protected $table = "solicitudes";
     protected $primarykey = "id";
+
     public $timestamps = false;
+
     protected $fillable=[
-        'titulo',
-        'descripcion',
-        'ruta_video',
-        'id_usuario'
+        'id_usuario_enviar',
+        'id_usuario_recibir'
     ];
 
     protected $guarded=[
 
     ];
-    public function usuario()
+    public function usuarioEmisor()
     {
-        return $this->belongsTo(User::class, 'id_usuario');
+        return $this->belongsTo(User::class, 'id_usuario_enviar');
     }
 }

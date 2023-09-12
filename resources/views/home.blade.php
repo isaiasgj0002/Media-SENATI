@@ -71,15 +71,35 @@
                             </div>
                         </div>
                     @endif
+                    <div class="container">
+                        <h1>Solicitudes Recibidas</h1>
+
+                        @if ($solicitudesRecibidas->isEmpty())
+                            <p>No tienes solicitudes recibidas.</p>
+                        @else
+                            <ul>
+                                @foreach ($solicitudesRecibidas as $solicitud)
+                                    <li>
+                                        <strong>De: {{ $solicitud->usuarioEmisor->username }}</strong><br>
+                                        <a href="{{route('aceptar.solicitud',$solicitud->id)}}">Aceptar</a><br>
+                                        <a href="{{route('rechazar.solicitud',$solicitud->id)}}">Rechazar</a>
+                                    </li>
+                                @endforeach
+                            </ul>
+                        @endif
+                    </div>
                     <div class="row">
-                        <div class="col-lg-12">
-                            <a class="btn btn-primary" href="{{route('index.video')}}">Publicar video</a>
+                        <div class="col-lg-8">
+                            <div class="container">
+                                <a class="btn btn-primary" href="{{route('index.video')}}">Publicar video</a>
+                            </div>
                             @foreach ($videos as $item)
                                 <div class="card">
                                     <div class="card-header">
                                         <h1>{{$item->titulo}}</h1>
+                                        <p>Publicado por: <a href="{{route('index.userpefil', $item->usuario->id)}}">{{ $item->usuario->username }}</a></p>
                                         @if ($item->id_usuario==auth()->user()->id)
-                                            <a class="btn btn-danger">Eliminar</a>
+                                            <a class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal-{{$item->id}}">Eliminar</a>
                                         @endif
                                     </div>
                                     <div class="card-body">
@@ -89,6 +109,27 @@
                                         </video>
                                         <p>{{$item->descripcion}}</p>
                                     </div>
+                                </div>
+                                <!-- Modal -->
+                                <div class="modal fade" id="deleteModal-{{$item->id}}" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+                                    <form method="POST" action="{{ route('destroy.video',$item->id) }}">
+                                        @csrf
+                                        <input name="_method" type="hidden" value="DELETE">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h1 class="modal-title fs-5" id="deleteModalLabel">Eliminar video</h1>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    ¿Estas seguro de que deseas eliminar el video?
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="submit" class="btn btn-danger">Eliminar</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
                                 </div>
                             @endforeach
                         </div>

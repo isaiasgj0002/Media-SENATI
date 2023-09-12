@@ -29,4 +29,11 @@ Route::post('/trabajos/crear', [TrabajoController::class, 'store'])->name('traba
 //Ruta de videos
 Route::get('/videos', [App\Http\Controllers\VideoController::class, 'index'])->name('index.video');
 Route::post('/videos/crear', [VideoController::class, 'store'])->name('create.video');
-//Route::get('/videos/crear', [VideoController::class, 'store'])->name('create.video');
+Route::delete('/videos/eliminar/{id}', [VideoController::class, 'destroy'])->name('destroy.video');
+//Ruta de perfil de usuarios
+Route::get('/perfil', [App\Http\Controllers\PerfilController::class, 'index'])->name('index.perfil');
+Route::get('/perfil/{id}', [App\Http\Controllers\UserPerfilController::class, 'index'])->name('index.userpefil');
+//envio de solicitudes
+Route::get('/solicitud/{id}', [App\Http\Controllers\SolicitudController::class, 'enviar'])->name('enviar.solicitud');
+Route::get('/solicitud/aceptar/{id}', [App\Http\Controllers\SolicitudController::class, 'aceptar'])->name('aceptar.solicitud');
+Route::get('/solicitud/rechazar/{id}', [App\Http\Controllers\SolicitudController::class, 'rechazar'])->name('rechazar.solicitud');
