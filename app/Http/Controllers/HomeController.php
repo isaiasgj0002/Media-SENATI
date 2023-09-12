@@ -7,6 +7,7 @@ use App\Models\Estudios;
 use App\Models\Trabajos;
 use App\Models\Video;
 use App\Models\Solicitudes;
+use App\Models\amistad;
 use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
@@ -36,6 +37,12 @@ class HomeController extends Controller
         $solicitudesRecibidas = Solicitudes::where('id_usuario_recibir', $user->id)
             ->with('usuarioEmisor')
             ->get();
-        return view('home', compact('estudiosExists', 'trabajosExists', 'videos', 'solicitudesRecibidas'));
+
+        $usuarioAutenticadoId = auth()->user()->id;
+        $amigos = amistad::where('id_usuario1', $usuarioAutenticadoId)
+            ->orWhere('id_usuario2', $usuarioAutenticadoId)
+            ->with(['usuario1', 'usuario2'])
+            ->get();
+        return view('home', compact('estudiosExists', 'trabajosExists', 'videos', 'solicitudesRecibidas', 'amigos'));
     }
 }

@@ -4,13 +4,23 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
+            @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
             <h1>Perfil de {{ $usuario->username }}</h1>
             <div class="row">
                 @if ($estudio)
                 <div class="col-md-6">
                     <h4>Estudios</h4>
-                    <form action="{{route('estudios')}}" method="POST">
+                    <form action="{{route('update.estudios',$estudio->id)}}" method="POST">
                         @csrf
+                        <input name="_method" type="hidden" value="PATCH">
                         <div class="form-group">
                             <input type="text" class="form-control" name="nombre" placeholder="Nombre de los estudios" value="{{$estudio->nombre}}">
                         </div>
@@ -38,8 +48,9 @@
                 @if ($trabajo)
                 <div class="col-md-6">
                     <h4>Trabajo:</h4>
-                    <form action="{{route('trabajos')}}" method="POST">
+                    <form action="{{route('update.trabajos', $trabajo->id)}}" method="POST">
                         @csrf
+                        <input name="_method" type="hidden" value="PATCH">
                         <div class="form-group">
                             <input type="text" class="form-control" name="empresa" placeholder="Empresa donde trabajaste" value="{{$trabajo->empresa}}">
                         </div>
@@ -59,7 +70,7 @@
                             <input type="date" class="form-control" name="fecha_fin">
                         </div>
                         <div class="form-group">
-                            <input type="submit" class="btn btn-success" value="Completar perfil">
+                            <input type="submit" class="btn btn-success" value="Actualizar Perfil">
                         </div>
                     </form>
                 </div>

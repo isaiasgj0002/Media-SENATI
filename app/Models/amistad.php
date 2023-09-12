@@ -20,4 +20,13 @@ class amistad extends Model
     protected $guarded=[
 
     ];
+    public function usuario1()
+    {
+        return $this->belongsTo(User::class, 'id_usuario1');
+    }
+
+    public function usuario2()
+    {
+        return $this->belongsTo(User::class, 'id_usuario2');
+    }
 }

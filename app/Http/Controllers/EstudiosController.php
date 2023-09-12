@@ -34,4 +34,24 @@ class EstudiosController extends Controller
         Session::flash('status', 'Se actualizó su perfil');
         return Redirect::to('/home');
     }
+    public function update(Request $request, $id){
+        $validate = $this->validate($request, [
+            'nombre'=>'required',
+            'escuela'=>'required',
+            'ciudad'=>'required',
+            'pais'=>'required',
+            'fecha_inicio' => 'required',
+            'fecha_fin' => 'required'
+        ]);
+        $estudios = Estudios::findOrFail($id);
+        $estudios->nombre = $request->get('nombre');
+        $estudios->escuela = $request->get('escuela');
+        $estudios->ciudad = $request->get('ciudad');
+        $estudios->pais = $request->get('pais');
+        $estudios->fecha_inicio = $request->get('fecha_inicio');
+        $estudios->fecha_fin = $request->get('fecha_fin');
+        $estudios->update();
+        Session::flash('status', 'Se actualizo su perfil');
+        return Redirect::to('/perfil');
+    }
 }

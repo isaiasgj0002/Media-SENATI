@@ -25,7 +25,9 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 //Rutas de estudios y trabajo
 Route::post('/estudios/crear', [EstudiosController::class, 'store'])->name('estudios');
+Route::patch('/estudios/editar/{id}', [EstudiosController::class, 'update'])->name('update.estudios');
 Route::post('/trabajos/crear', [TrabajoController::class, 'store'])->name('trabajos');
+Route::patch('/trabajos/editar/{id}', [TrabajoController::class, 'update'])->name('update.trabajos');
 //Ruta de videos
 Route::get('/videos', [App\Http\Controllers\VideoController::class, 'index'])->name('index.video');
 Route::post('/videos/crear', [VideoController::class, 'store'])->name('create.video');

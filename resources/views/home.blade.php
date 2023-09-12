@@ -14,14 +14,14 @@
                         </div>
                     @endif
                     @if ($errors->any())
-                    <div class="alert alert-danger">
-                        <ul>
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
-                @endif
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
                     @if(!$estudiosExists && !$trabajosExists)
                         <div class="row">
                             <div class="col-md-6">
@@ -97,9 +97,22 @@
                             </ul>
                         @endif
                     </div>
-                    <div class="row">
+                    <div class="container">
+                        <h1>Amigos agregados</h1>
+                        @if ($amigos->isEmpty())
+                            <p>No tienes amigos.</p>
+                        @endif
+                        @foreach ($amigos as $amistad)
+                            @if ($amistad->id_usuario1 == auth()->user()->id)
+                                <li><a href="{{route('index.userpefil', $amistad->usuario2->id)}}">{{ $amistad->usuario2->username }}</a></li>
+                            @else
+                                <li><a href="{{route('index.userpefil', $amistad->usuario1->id)}}">{{ $amistad->usuario1->username }}</a></li>
+                            @endif
+                        @endforeach
+                    </div>
+                    <div class="row" style="margin-top: 50px">
                         <div class="col-lg-8">
-                            <div class="container">
+                            <div class="container" style="margin-bottom: 20px">
                                 <a class="btn btn-primary" href="{{route('index.video')}}">Publicar video</a>
                             </div>
                             @foreach ($videos as $item)

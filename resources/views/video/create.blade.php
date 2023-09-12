@@ -14,23 +14,23 @@
                 @endif
                 <div class="card">
                     <div class="card-header">Crear video</div>
-                    <div class="card-body">
-                        <form action="{{route('create.video')}}" method="POST" enctype="multipart/form-data">
-                            @csrf
-                            <div class="form-group">
-                                <input type="text" class="form-control" name="titulo" placeholder="Titulo del video">
-                            </div>
-                            <div class="form-group">
-                                <input type="text" class="form-control" name="descripcion" placeholder="Descripcion corta del video">
-                            </div>
-                            <div class="form-group">
-                                <input type="file" class="form-control" name="video">
-                            </div>
-                            <div class="form-group">
-                                <input type="submit" class="btn btn-success" value="Publicar">
-                            </div>
-                        </form>
-                    </div>
+                        <div class="card-body">
+                            <form action="{{route('create.video')}}" method="POST" enctype="multipart/form-data">
+                                @csrf
+                                <div class="form-group">
+                                    <input type="text" class="form-control" name="titulo" placeholder="Titulo del video">
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" name="descripcion" placeholder="Descripcion corta del video">
+                                </div>
+                                <div class="form-group">
+                                    <input type="file" class="form-control" name="video">
+                                </div>
+                                <div class="form-group">
+                                    <input type="submit" class="btn btn-success" value="Publicar">
+                                </div>
+                            </form>
+                        </div>
                 </div>
             </div>
         </div>
