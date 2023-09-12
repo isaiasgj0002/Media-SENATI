@@ -37,3 +37,5 @@ Route::get('/perfil/{id}', [App\Http\Controllers\UserPerfilController::class, 'i
 Route::get('/solicitud/{id}', [App\Http\Controllers\SolicitudController::class, 'enviar'])->name('enviar.solicitud');
 Route::get('/solicitud/aceptar/{id}', [App\Http\Controllers\SolicitudController::class, 'aceptar'])->name('aceptar.solicitud');
 Route::get('/solicitud/rechazar/{id}', [App\Http\Controllers\SolicitudController::class, 'rechazar'])->name('rechazar.solicitud');
+//Comentarios
+Route::post('/comentarios/publicar', [App\Http\Controllers\ComentariosController::class, 'create'])->name('create.comentario');

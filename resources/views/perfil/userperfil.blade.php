@@ -69,6 +69,14 @@
                                 </video>
                                 <p>{{$item->descripcion}}</p>
                             </div>
+                            @if ($existeAmistad)
+                                <form style="margin-top: 10px" action="{{route('create.comentario')}}" method="POST">
+                                    @csrf
+                                    <input type="text" class="form-control" name="comentario" placeholder="Escriba un comentatio">
+                                    <input type="hidden" name="id_video" value="{{$item->id}}">
+                                    <input type="submit" class="btn btn-primary" style="margin-top: 10px" value="Comentar">
+                                </form>
+                            @endif
                         </div>
                     @endforeach
                 </div>

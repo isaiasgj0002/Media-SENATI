@@ -13,6 +13,15 @@
                             {{ session('status') }}
                         </div>
                     @endif
+                    @if ($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
                     @if(!$estudiosExists && !$trabajosExists)
                         <div class="row">
                             <div class="col-md-6">
@@ -108,6 +117,32 @@
                                             Tu navegador no admite el elemento de video.
                                         </video>
                                         <p>{{$item->descripcion}}</p>
+                                    </div>
+                                    <div class="card-footer">
+                                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#commentsModal-{{$item->id}}">
+                                            Ver comentarios
+                                        </button>
+                                    </div>
+                                </div>
+                                <!-- Modal COMENTARIOS-->
+                                <div class="modal fade" id="commentsModal-{{$item->id}}" tabindex="-1" aria-labelledby="commentsModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h1 class="modal-title fs-5" id="commentsModalLabel">Comentarios</h1>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                            <div class="modal-body">
+                                                <ul>
+                                                    @foreach ($item->comentarios as $comentario)
+                                                        <li>{{ $comentario->comentario }}</li>
+                                                    @endforeach
+                                                </ul>
+                                            </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                        </div>
+                                    </div>
                                     </div>
                                 </div>
                                 <!-- Modal -->

@@ -11,7 +11,7 @@ class TrabajoController extends Controller
 {
     public function store(Request $request){
         $validate = $this->validate($request, [
-            'empresa'=>'required|alpha',
+            'empresa'=>'required',
             'puesto'=>'required',
             'ciudad'=>'required',
             'pais'=>'required',

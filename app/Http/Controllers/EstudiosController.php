@@ -15,7 +15,7 @@ class EstudiosController extends Controller
     }
     public function store(Request $request){
         $validate = $this->validate($request, [
-            'nombre'=>'required|alpha',
+            'nombre'=>'required',
             'escuela'=>'required',
             'ciudad'=>'required',
             'pais'=>'required',

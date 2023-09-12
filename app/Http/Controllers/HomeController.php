@@ -32,8 +32,9 @@ class HomeController extends Controller
         $estudiosExists = Estudios::where('id_usuario', $user->id)->exists();
         $trabajosExists = Trabajos::where('id_usuario', $user->id)->exists();
         $videos = Video::all();
+        $videos->load('comentarios');
         $solicitudesRecibidas = Solicitudes::where('id_usuario_recibir', $user->id)
-            ->with('usuarioEmisor') // Cargar la relación
+            ->with('usuarioEmisor')
             ->get();
         return view('home', compact('estudiosExists', 'trabajosExists', 'videos', 'solicitudesRecibidas'));
     }

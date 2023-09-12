@@ -63,7 +63,7 @@
                                     <h2 class="mt-6 text-xl font-semibold text-gray-900 dark:text-white">Comentarios</h2>
 
                                     <p class="mt-4 text-gray-500 dark:text-gray-400 text-sm leading-relaxed">
-                                        Puedes publicar comentarios en cualquier video
+                                        Puedes publicar comentarios en cualquier video de un usuario que acepte tu solicitud
                                     </p>
                                 </div>
                             </a>
